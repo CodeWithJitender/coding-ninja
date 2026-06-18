@@ -1,0 +1,329 @@
+/* 
+  Stock Market Analysis UI Styling
+  Premium dark mode theme with glassmorphic cards and glowing interactions.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-gradient-start: #00000a;
+  --bg-gradient-end: #000022;
+  --card-bg: rgba(3, 6, 43, 0.7);
+  --card-border: rgba(255, 255, 255, 0.04);
+  --card-border-active: rgba(37, 99, 235, 0.4);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --color-up: #00e676;
+  --color-down: #ff3d71;
+  --color-ticker-border: #1e3a8a;
+  --color-ticker-bg: rgba(30, 58, 138, 0.3);
+  --color-ticker-text: #60a5fa;
+  --btn-bg: #070d44;
+  --btn-bg-hover: #121c7a;
+  --btn-bg-active: #1a27b8;
+  
+  --font-family: 'Outfit', sans-serif;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --glow-shadow: 0 0 15px rgba(37, 99, 235, 0.35);
+  --glow-shadow-green: 0 0 15px rgba(0, 230, 118, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 10, 0.5);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(37, 99, 235, 0.3);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 99, 235, 0.6);
+}
+
+/* Main Layout */
+header {
+  padding: 15px 20px 10px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(to right, #ffffff, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-container {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px 20px 40px;
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 18px;
+}
+
+/* Left Panel */
+.main-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* Glassmorphism Card base style */
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 30px;
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-height: 330px;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  margin-bottom: 12px;
+}
+
+canvas {
+  width: 100% !important;
+  height: 230px !important;
+}
+
+/* Timeframe Controls */
+.timeframe-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.timeframe-btn {
+  background: var(--btn-bg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.timeframe-btn:hover {
+  background: var(--btn-bg-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.timeframe-btn:active {
+  transform: translateY(1px);
+}
+
+.timeframe-btn.active {
+  background: var(--btn-bg-active);
+  color: var(--text-primary);
+  border-color: rgba(37, 99, 235, 0.6);
+  box-shadow: var(--glow-shadow);
+}
+
+/* Description Card */
+.desc-card {
+  padding: 12px 20px;
+}
+
+.desc-card h2 {
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.desc-card h2::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.desc-text {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  text-align: justify;
+  transition: opacity 0.25s ease;
+}
+
+.desc-text.fade {
+  opacity: 0.1;
+}
+
+/* Right Panel - Stock List */
+.sidebar-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stock-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 80px 1fr 85px;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stock-item:hover {
+  background: rgba(8, 12, 58, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+.stock-item.active {
+  background: rgba(10, 18, 70, 0.9);
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: var(--glow-shadow);
+}
+
+.stock-ticker {
+  border: 1px solid var(--color-ticker-border);
+  background: var(--color-ticker-bg);
+  color: var(--color-ticker-text);
+  padding: 6px 10px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.stock-price {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.stock-change {
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.stock-change.up {
+  color: var(--color-up);
+}
+
+.stock-change.down {
+  color: var(--color-down);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+    padding: 0 20px 20px 20px;
+  }
+  
+  header {
+    padding: 25px 20px 15px 20px;
+  }
+  
+  .chart-card {
+    min-height: 420px;
+  }
+  
+  canvas {
+    height: 320px !important;
+  }
+  
+  .sidebar-panel {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .stock-item {
+    grid-template-columns: 70px 1fr 75px;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  
+  .stock-ticker {
+    padding: 4px 6px;
+    font-size: 0.75rem;
+  }
+  
+  .stock-price {
+    font-size: 0.95rem;
+  }
+  
+  .stock-change {
+    font-size: 0.85rem;
+  }
+  
+  .timeframe-controls {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .timeframe-btn {
+    padding: 6px 14px;
+    font-size: 0.8rem;
+  }
+}

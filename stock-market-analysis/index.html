@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Market Analysis</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="Interactive stock market analysis dashboard with real-time dynamic charts, historical data filters, and detailed company portfolios.">
+  <meta name="keywords" content="Stock, Market, Analysis, AAPL, MSFT, Interactive Chart, Chart.js">
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Stock Market Analysis</h1>
+  </header>
+
+  <main class="dashboard-container">
+    <!-- Left Section: Chart and Description -->
+    <section class="main-panel">
+      <!-- Chart Card -->
+      <div class="glass-card chart-card">
+        <div class="chart-container">
+          <canvas id="stockChart"></canvas>
+        </div>
+
+        <!-- Timeframe Selector Controls -->
+        <div class="timeframe-controls">
+          <button class="timeframe-btn active" data-timeframe="1M">1 Month</button>
+          <button class="timeframe-btn" data-timeframe="3M">3 Month</button>
+          <button class="timeframe-btn" data-timeframe="1Y">1 Year</button>
+          <button class="timeframe-btn" data-timeframe="5Y">5 Years</button>
+        </div>
+      </div>
+
+      <!-- Description Card -->
+      <div class="glass-card desc-card">
+        <h2>About <span id="company-name-title">Apple Inc.</span></h2>
+        <p id="company-desc" class="desc-text">
+          Loading company details...
+        </p>
+      </div>
+    </section>
+
+    <!-- Right Section: Stock List Sidebar -->
+    <section class="sidebar-panel" id="stock-list-container">
+      <!-- Generated dynamically in script.js to keep data in sync -->
+    </section>
+  </main>
+
+  <!-- JS Logic Link -->
+  <script src="script.js"></script>
+  <script src="list.js"></script>
+</body>
+
+</html>
