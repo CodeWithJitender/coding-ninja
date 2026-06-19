@@ -1,6 +1,7 @@
 //Implement your code here to make it a functional shopping website
 // Select the container where products will be displayed
 const container = document.querySelector(".products");
+const cart = []
 async function fetchProduct() {
   const res = await fetch("https://dummyjson.com/products");
   const data = await res.json();
@@ -22,7 +23,10 @@ async function fetchProduct() {
   });
 }
 // A mock function to show interactivity
-function addToCart(productId) {
-  alert(`Product ID ${productId} added to your cart!`);
+async function addToCart(productId) {
+  const res = await fetch("https://dummyjson.com/products");
+  const data = await res.json();
+  const product = data.products.find((item) => item.id === productId);
+  cart.push(product);
 }
 fetchProduct();

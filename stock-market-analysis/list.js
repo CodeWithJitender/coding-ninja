@@ -37,15 +37,20 @@ async function data() {
   stocks.map((stock) =>
     finalData.push({
       symbol: stock,
-      summary: stockSummaryData.stocksProfileData[0]?.[stock]?.summary || "N/A",
-      bookValue: stockData.stocksStatsData[0]?.[stock]?.bookValue || "N/A",
-      profit: stockData.stocksStatsData[0]?.[stock]?.profit || "N/A",
+      desc: stockSummaryData.stocksProfileData[0]?.[stock]?.summary || "N/A",
+      price: stockData.stocksStatsData[0]?.[stock]?.bookValue || "N/A",
+      change: stockData.stocksStatsData[0]?.[stock]?.profit || "N/A",
       chart: stockChartData.stocksData[0]?.[stock] || "N/A",
     }),
   );
 
-  console.log(finalData);
+  if (typeof window === 'undefined') {
+    const fs = require('fs');
+    fs.writeFileSync('finalData.json', JSON.stringify(finalData, null, 2));
+    console.log("Data saved to finalData.json");
+  } else {
+    console.log(finalData);
+  }
 }
 
 data();
-window.finalData = finalData;

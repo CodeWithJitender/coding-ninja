@@ -6,6 +6,9 @@
     <title>Document</title>
   </head>
   <body>
+    <div class="user-container1"></div>
+    <div class="user-container2"></div>
+    <div class="user-container3"></div>
     <script>
       function fetchUser(id) {
         const user = fetch(`https://dummyjson.com/users/${id}`)
@@ -17,12 +20,18 @@
           })
           .then((data) => {
             console.log(data);
+            document.querySelector('.user-container1').innerHTML = 
+            `<div class="user-card"><h2>${data.firstName} ${data.lastName}</h2> <p>Email: ${data.email}</p><p>Phone: ${data.phone}</p></div>`;
+             document.querySelector('.user-container2').innerHTML = 
+            `<div class="user-card"><h2>${data.firstName} ${data.lastName}</h2> <p>Email: ${data.email}</p><p>Phone: ${data.phone}</p></div>`;
+             document.querySelector('.user-container3').innerHTML = 
+            `<div class="user-card"><h2>${data.firstName} ${data.lastName}</h2> <p>Email: ${data.email}</p><p>Phone: ${data.phone}</p></div>`;
           })
           .catch((error) => {
             console.error(error);
           });
       }
-      fetchUser(1);
+      fetchUser(6);
     </script>
   </body>
 </html>
